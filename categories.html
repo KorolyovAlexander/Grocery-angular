@@ -1,0 +1,5 @@
+<ul id="categories">
+    <li ng-repeat="category in categories">
+        <a ui-sref="products" ng-click="getProducts($index)">{{category.name}}</a>
+    </li>
+</ul>

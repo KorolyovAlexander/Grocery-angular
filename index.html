@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grocery</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="main.js"></script>
+    <script src="MainController.js"></script>
+    <script src="MainService.js"></script>
+</head>
+<body ng-controller="MainController">
+    <a ui-sref="categories" id="address">grocery</a>
+    <div ui-view></div>
+</body>
+</html>
