@@ -1,8 +1,8 @@
 <ul>
-    <li ng-repeat="product in products">
-        <a ui-sref="product" ng-click="getProduct($index)">
-            <p>{{product.name}}</p>
-            <image src="{{product.icon}}"></image>
+    <li ng-repeat="prod in mc.products">
+        <a ui-sref="product" ng-click="mc.getProduct($index)">
+            <p>{{prod.name}}</p>
+            <image ng-src="{{prod.icon}}"></image>
         </a>
     </li>
 </ul>

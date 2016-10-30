@@ -8,6 +8,7 @@ angular.element(document).ready(function(){
 });
 
 app.config(function($stateProvider, $urlRouterProvider){
+    $urlRouterProvider.otherwise('/');
     $stateProvider
         .state("categories", {
             url: "/",
@@ -21,6 +22,4 @@ app.config(function($stateProvider, $urlRouterProvider){
             url: "/product",
             templateUrl: "product.html"
         });
-
-    $urlRouterProvider.otherwise('/');
 });

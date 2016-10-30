@@ -4,29 +4,50 @@
 angular.module("App")
     .controller("MainController", MainController);
 
-MainController.$inject = ["$scope", "MainService"];
+MainController.$inject = ["MainService", "$timeout"];
 
-function MainController($scope, MainService) {
-    $scope.categories = [];
-    $scope.products = [];
-    $scope.product = 0;
+function MainController(MainService, $timeout) {
+
+    var _this = this;
+
+    _this.categories = 0;
+    _this.products = 0;
+    _this.product = 0;
 
     function init(){
-        MainService.getCategories().then(function (response) {
-            $scope.categories = response.data;
-        });
+
+        var categoryID = localStorage.getItem('categoryId'),
+            productID = localStorage.getItem('productId');
+
+        MainService
+            .getCategories()
+            .then(function (response) {
+                _this.categories = response.data;
+            });
+
+        _this.getProducts(parseInt(categoryID));
+
+        $timeout(function() {
+            _this.getProduct(parseInt(productID));
+        }, 100);
     }
 
-    $scope.getProducts = function(categoryId){
-        MainService.getProducts().then(function (response) {
-            $scope.products = response.data.filter(function(elem){
-                return elem.categoryId == categoryId+1;
+    _this.getProducts = function(categoryId){
+        MainService
+            .getProducts()
+            .then(function (response) {
+                _this.products = response.data.filter(function(elem){
+                    return parseInt(elem.categoryId) === categoryId+1;
+                });
             });
-        });
+
+        localStorage.setItem('categoryId', categoryId);
     };
 
-    $scope.getProduct = function(productId){
-        $scope.product = $scope.products[productId];
+    _this.getProduct = function(productId){
+        _this.product = _this.products[productId];
+
+        localStorage.setItem('productId', productId);
     };
 
     init();
