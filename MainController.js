@@ -14,6 +14,10 @@ function MainController(MainService, $timeout) {
     _this.products = 0;
     _this.product = 0;
 
+    _this.countOnPage = 2;
+    _this.itemsToShow = [];
+    _this.indexes = [];
+
     function init(){
 
         var categoryID = localStorage.getItem('categoryId'),
@@ -25,11 +29,15 @@ function MainController(MainService, $timeout) {
                 _this.categories = response.data;
             });
 
-        _this.getProducts(parseInt(categoryID));
+        if(categoryID != undefined) {
+            _this.getProducts(parseInt(categoryID));
 
-        $timeout(function() {
-            _this.getProduct(parseInt(productID));
-        }, 100);
+            if(productID != undefined) {
+                $timeout(function () {
+                    _this.getProduct(parseInt(productID));
+                }, 50);
+            }
+        }
     }
 
     _this.getProducts = function(categoryId){
@@ -41,7 +49,19 @@ function MainController(MainService, $timeout) {
                 });
             });
 
+        $timeout(function() {
+            _this.itemsToShow = _this.products.slice(0, _this.countOnPage);
+            _this.indexes = [];
+            for(var i = 0; i < _this.products.length/_this.countOnPage; ++i){
+                _this.indexes.push({index: i+1});
+            }
+        }, 50);
+
         localStorage.setItem('categoryId', categoryId);
+    };
+
+    _this.getItemsToShow = function(index){
+        _this.itemsToShow = _this.products.slice(index*_this.countOnPage, (index+1)*_this.countOnPage);
     };
 
     _this.getProduct = function(productId){
