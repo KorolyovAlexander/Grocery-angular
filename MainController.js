@@ -38,6 +38,8 @@ function MainController(MainService, $timeout) {
                 }, 50);
             }
         }
+
+        localStorage.setItem('productsIndex', 0);
     }
 
     _this.getProducts = function(categoryId){
@@ -69,6 +71,8 @@ function MainController(MainService, $timeout) {
 
     _this.getItemsToShow = function(index){
         _this.itemsToShow = _this.products.slice(index*_this.countOnPage, (index+1)*_this.countOnPage);
+
+        localStorage.setItem('productsIndex', index);
         //-----------------------making clicked index red-------------------------
         var tempIndexes = $('.productsIndex'),
             i;
@@ -83,9 +87,12 @@ function MainController(MainService, $timeout) {
     };
 
     _this.getProduct = function(productId){
-        _this.product = _this.products[productId];
 
-        localStorage.setItem('productId', productId);
+        var index = localStorage.getItem('productsIndex')*_this.countOnPage + productId;
+
+        _this.product = _this.products[index];
+
+        localStorage.setItem('productId', index);
     };
 
     init();
