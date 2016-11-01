@@ -57,6 +57,13 @@
 		"categoryId": "2"
 	},
 	{
+		"name": "plum",
+		"price": "1.5$",
+		"image": "images/plum.jpg",
+		"icon": "icons/plum.jpg",
+		"categoryId": "2"
+	},
+	{
 		"name": "beef",
 		"price": "4$",
 		"image": "images/beef.jpg",

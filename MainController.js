@@ -55,6 +55,13 @@ function MainController(MainService, $timeout) {
             for(var i = 0; i < _this.products.length/_this.countOnPage; ++i){
                 _this.indexes.push({index: i+1});
             }
+            //--------------------making clicked index red---------------------
+            $timeout(function(){
+                var tempIndexes = $('.productsIndex');
+                tempIndexes.addClass('indexesToClick');
+                $(tempIndexes[0]).removeClass('indexesToClick');
+            }, 50);
+            //----------------------------------------------------------------
         }, 50);
 
         localStorage.setItem('categoryId', categoryId);
@@ -62,6 +69,17 @@ function MainController(MainService, $timeout) {
 
     _this.getItemsToShow = function(index){
         _this.itemsToShow = _this.products.slice(index*_this.countOnPage, (index+1)*_this.countOnPage);
+        //-----------------------making clicked index red-------------------------
+        var tempIndexes = $('.productsIndex'),
+            i;
+
+        for(i = 0; i < tempIndexes.length; ++i){
+            if(i != index) {
+                $(tempIndexes[i]).addClass('indexesToClick');
+            }
+        }
+        $(tempIndexes[index]).removeClass('indexesToClick');
+        //-----------------------------------------------------------------------
     };
 
     _this.getProduct = function(productId){

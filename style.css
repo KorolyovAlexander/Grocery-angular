@@ -1,0 +1,33 @@
+.title{
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.categories{
+    margin: 20px;
+}
+
+#products{
+    margin: 50px;
+}
+
+#items{
+    height: 220px;
+}
+
+#indexes{
+    margin-left: 20px;
+}
+
+.productsIndex{
+    margin-left: 5px;
+}
+
+.indexesToClick{
+    color: blue;
+    text-decoration: underline;
+}
+
+#product{
+    margin-left: 50px;
+}
