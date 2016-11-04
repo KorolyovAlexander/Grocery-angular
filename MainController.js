@@ -76,6 +76,7 @@ function MainController(MainService) {
 
         var countOfPages = _this.products.length/_this.countOnPage;
 
+        _this.productsIndex = 0;
         _this.indexes = null;
         _this.indexes = [];
         for(var i = 0; i < countOfPages; ++i){
@@ -87,8 +88,6 @@ function MainController(MainService) {
     function getItemsToShow(index){
         _this.itemsToShow = _this.products.slice(index*_this.countOnPage, (index+1)*_this.countOnPage);
         _this.productsIndex = index;
-
-        localStorage.setItem('productsIndex', index);
     }
 
     function getProduct(productId){
