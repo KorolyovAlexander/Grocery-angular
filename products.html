@@ -1,14 +1,19 @@
-<p class="title">{{mc.categories[mc.itemsToShow[0].categoryId].name}}</p>
+<p class="title">{{vm.categories[vm.itemsToShow[0].categoryId].name}}</p>
 <div id="products">
     <div id="items">
-        <div ng-repeat="item in mc.itemsToShow">
-            <a ui-sref="product" ng-click="mc.getProduct($index)">
+        <div ng-repeat="item in vm.itemsToShow">
+            <a ui-sref="product" ng-click="vm.getProduct(vm.countOnPage*vm.productsIndex+$index)">
                 <p>{{item.name}}</p>
                 <image ng-src="{{item.icon}}"></image>
             </a>
         </div>
     </div>
     <div id="indexes">
-        <a class="productsIndex" ng-repeat="index in mc.indexes" ng-click="mc.getItemsToShow($index)">{{index.index}}</a>
+        <a ng-class="{
+                        'indexesToClick': $index!==vm.productsIndex
+                      }"
+           ng-repeat="index in vm.indexes" ng-click="vm.getItemsToShow($index)">
+            {{index.index}}
+        </a>
     </div>
 </div>

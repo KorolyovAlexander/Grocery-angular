@@ -4,9 +4,9 @@
 angular.module("App")
     .controller("MainController", MainController);
 
-MainController.$inject = ["MainService", "$timeout"];
+MainController.$inject = ["MainService"];
 
-function MainController(MainService, $timeout) {
+function MainController(MainService) {
 
     var _this = this;
 
@@ -14,85 +14,87 @@ function MainController(MainService, $timeout) {
     _this.products = 0;
     _this.product = 0;
 
+    _this.categoryId = 0;
+    _this.productId = 0;
+
     _this.countOnPage = 2;
     _this.itemsToShow = [];
     _this.indexes = [];
+    _this.productsIndex = 0;
+
+    _this.getProducts = getProducts;
+    _this.getProduct = getProduct;
+    _this.getItemsToShow = getItemsToShow;
+
+    init();
 
     function init(){
 
-        var categoryID = localStorage.getItem('categoryId'),
-            productID = localStorage.getItem('productId');
+        _this.categoryId = parseInt(localStorage.getItem('categoryId'));
 
         MainService
             .getCategories()
             .then(function (response) {
                 _this.categories = response.data;
+                if(_this.categoryId || _this.categoryId == 0) {
+                    _this.getProducts(_this.categoryId);
+                }
+                else{
+                    _this.categoryId = 0;
+                }
             });
-
-        if(categoryID != undefined) {
-            _this.getProducts(parseInt(categoryID));
-
-            if(productID != undefined) {
-                $timeout(function () {
-                    _this.getProduct(parseInt(productID));
-                }, 50);
-            }
-        }
     }
 
-    _this.getProducts = function(categoryId){
+    function getProducts(categoryId) {
         MainService
             .getProducts()
             .then(function (response) {
-                _this.products = response.data.filter(function(elem){
-                    return parseInt(elem.categoryId) === categoryId+1;
-                });
+
+                _this.productId = parseInt(localStorage.getItem('productId'));
+
+                filterProducts(response, categoryId);
+                if (_this.productId || _this.productId == 0) {
+                    _this.getProduct(_this.productId);
+                }
+                else{
+                    _this.productId = 0;
+                }
+                saveProductsIndex();
+                getItemsToShow(_this.productsIndex);
             });
 
-        $timeout(function() {
-            localStorage.setItem('productsIndex', 0);
-            _this.itemsToShow = _this.products.slice(0, _this.countOnPage);
-            _this.indexes = [];
-            for(var i = 0; i < _this.products.length/_this.countOnPage; ++i){
-                _this.indexes.push({index: i+1});
-            }
-            //--------------------making clicked index red---------------------
-            $timeout(function(){
-                var tempIndexes = $('.productsIndex');
-                tempIndexes.addClass('indexesToClick');
-                $(tempIndexes[0]).removeClass('indexesToClick');
-            }, 50);
-            //----------------------------------------------------------------
-        }, 50);
-
         localStorage.setItem('categoryId', categoryId);
-    };
+    }
 
-    _this.getItemsToShow = function(index){
+    function filterProducts(response, categoryId){
+        _this.products = response.data.filter(function(elem){
+            return parseInt(elem.categoryId) === categoryId+1;
+        });
+    }
+
+    function saveProductsIndex(){
+
+        var countOfPages = _this.products.length/_this.countOnPage;
+
+        _this.indexes = null;
+        _this.indexes = [];
+        for(var i = 0; i < countOfPages; ++i){
+            _this.indexes.push({index: i+1});
+        }
+    }
+
+
+    function getItemsToShow(index){
         _this.itemsToShow = _this.products.slice(index*_this.countOnPage, (index+1)*_this.countOnPage);
+        _this.productsIndex = index;
 
         localStorage.setItem('productsIndex', index);
-        //-----------------------making clicked index red-------------------------
-        var tempIndexes = $('.productsIndex'),
-            i;
+    }
 
-        for(i = 0; i < tempIndexes.length; ++i){
-            if(i != index) {
-                $(tempIndexes[i]).addClass('indexesToClick');
-            }
-        }
-        $(tempIndexes[index]).removeClass('indexesToClick');
-        //-----------------------------------------------------------------------
-    };
+    function getProduct(productId){
 
-    _this.getProduct = function(productId){
+        _this.product = _this.products[productId];
 
-        var index = localStorage.getItem('productsIndex')*_this.countOnPage + productId;
-
-        _this.product = _this.products[index];
-
-        localStorage.setItem('productId', index);
-    };
-
-    init();
+        localStorage.setItem('productId', productId);
+    }
 }

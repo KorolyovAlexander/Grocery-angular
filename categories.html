@@ -1,6 +1,6 @@
 <p class="title">categories</p>
 <ul>
-    <li class="categories" ng-repeat="category in mc.categories">
-        <a ui-sref="products" ng-click="mc.getProducts($index)">{{category.name}}</a>
+    <li class="categories" ng-repeat="category in vm.categories">
+        <a ui-sref="products" ng-click="vm.getProducts($index)">{{category.name}}</a>
     </li>
 </ul>
