@@ -22,6 +22,9 @@ function MainController(MainService) {
     _this.indexes = [];
     _this.productsIndex = 0;
 
+    _this.filterByName = '';
+
+    _this.getCategoryProducts = getCategoryProducts;
     _this.getProducts = getProducts;
     _this.getProduct = getProduct;
     _this.getItemsToShow = getItemsToShow;
@@ -31,6 +34,7 @@ function MainController(MainService) {
     function init(){
 
         _this.categoryId = parseInt(localStorage.getItem('categoryId'));
+        _this.filterByName = localStorage.getItem('filter');
 
         MainService
             .getCategories()
@@ -43,6 +47,12 @@ function MainController(MainService) {
                     _this.categoryId = 0;
                 }
             });
+    }
+
+    function getCategoryProducts(categoryId){
+        _this.filterByName = '';
+        localStorage.setItem('filter', _this.filterByName);
+        getProducts(categoryId);
     }
 
     function getProducts(categoryId) {
@@ -63,6 +73,7 @@ function MainController(MainService) {
                 getItemsToShow(_this.productsIndex);
             });
 
+        _this.categoryId = categoryId;
         localStorage.setItem('categoryId', categoryId);
     }
 
@@ -70,6 +81,11 @@ function MainController(MainService) {
         _this.products = response.data.filter(function(elem){
             return parseInt(elem.categoryId) === categoryId+1;
         });
+        if(_this.filterByName.length) {
+            _this.products = _this.products.filter(function (elem) {
+                return !elem.name.indexOf(_this.filterByName);
+            });
+        }
     }
 
     function saveProductsIndex(){
@@ -94,6 +110,8 @@ function MainController(MainService) {
 
         _this.product = _this.products[productId];
 
+        _this.productId = productId;
         localStorage.setItem('productId', productId);
+        localStorage.setItem('filter', _this.filterByName);
     }
 }

@@ -1,17 +1,18 @@
-<p class="title">{{vm.categories[vm.itemsToShow[0].categoryId].name}}</p>
+<p class="title">{{vm.categories[vm.categoryId+1].name}}</p>
+<p>search: <input type="text" ng-model="vm.filterByName" ng-change="vm.getProducts(vm.categoryId)" /></p>
 <div id="products">
     <div id="items">
         <div ng-repeat="item in vm.itemsToShow">
             <a ui-sref="product" ng-click="vm.getProduct(vm.countOnPage*vm.productsIndex+$index)">
                 <p>{{item.name}}</p>
-                <image ng-src="{{item.icon}}"></image>
+                <image class="productsIcon" ng-src="{{item.image}}"></image>
             </a>
         </div>
     </div>
     <div id="indexes">
         <a ng-class="{
                         'indexesToClick': $index!==vm.productsIndex
-                      }"
+                     }"
            ng-repeat="index in vm.indexes" ng-click="vm.getItemsToShow($index)">
             {{index.index}}
         </a>

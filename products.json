@@ -3,49 +3,42 @@
 		"name": "cabbage",
 		"price": "0.5$",
 		"image": "images/cabbage.jpg",
-		"icon": "icons/cabbage.jpg",
 		"categoryId": "1"
 	},
 	{
 		"name": "cucumber",
 		"price": "1$",
 		"image": "images/cucumber.jpg",
-		"icon": "icons/cucumber.jpg",
 		"categoryId": "1"
 	},
 	{
 		"name": "carrot",
 		"price": "0.75$",
 		"image": "images/carrot.jpg",
-		"icon": "icons/carrot.jpg",
 		"categoryId": "1"
 	},
 	{
 		"name": "potato",
 		"price": "0.9$",
 		"image": "images/potato.jpg",
-		"icon": "icons/potato.jpg",
 		"categoryId": "1"
 	},
 	{
 		"name": "apple",
 		"price": "2$",
 		"image": "images/apple.jpg",
-		"icon": "icons/apple.jpg",
 		"categoryId": "2"
 	},
 	{
 		"name": "pear",
 		"price": "3$",
 		"image": "images/pear.jpg",
-		"icon": "icons/pear.jpg",
 		"categoryId": "2"
 	},
 	{
 		"name": "banana",
 		"price": "2.5$",
 		"image": "images/banana.jpg",
-		"icon": "icons/banana.jpg",
 		"categoryId": "2"
 	},
 	{
@@ -53,28 +46,24 @@
 		"name": "kiwi",
 		"price": "3.5$",
 		"image": "images/kiwi.jpg",
-		"icon": "icons/kiwi.jpg",
 		"categoryId": "2"
 	},
 	{
 		"name": "plum",
 		"price": "1.5$",
 		"image": "images/plum.jpg",
-		"icon": "icons/plum.jpg",
 		"categoryId": "2"
 	},
 	{
 		"name": "beef",
 		"price": "4$",
 		"image": "images/beef.jpg",
-		"icon": "icons/beef.jpg",
 		"categoryId": "3"
 	},
 	{
 		"name": "pork",
 		"price": "3.75$",
 		"image": "images/pork.jpg",
-		"icon": "icons/pork.jpg",
 		"categoryId": "3"
 	},
 	{
@@ -82,28 +71,24 @@
 		"name": "chicken",
 		"price": "3.25$",
 		"image": "images/chicken.jpg",
-		"icon": "icons/chicken.jpg",
 		"categoryId": "3"
 	},
 	{
 		"name": "salmon",
 		"price": "10$",
 		"image": "images/salmon.jpg",
-		"icon": "icons/salmon.jpg",
 		"categoryId": "4"
 	},
 	{
 		"name": "hake",
 		"price": "3$",
 		"image": "images/hake.jpg",
-		"icon": "icons/hake.jpg",
 		"categoryId": "4"
 	},
 	{
 		"name": "flounder",
 		"price": "4.5$",
 		"image": "images/flounder.jpg",
-		"icon": "icons/flounder.jpg",
 		"categoryId": "4"
 	}
 ]

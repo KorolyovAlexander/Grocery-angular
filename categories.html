@@ -1,6 +1,6 @@
 <p class="title">categories</p>
 <ul>
     <li class="categories" ng-repeat="category in vm.categories">
-        <a ui-sref="products" ng-click="vm.getProducts($index)">{{category.name}}</a>
+        <a ui-sref="products" ng-click="vm.getCategoryProducts($index)">{{category.name}}</a>
     </li>
 </ul>
