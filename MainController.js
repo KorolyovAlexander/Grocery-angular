@@ -1,8 +1,7 @@
 /**
  * Created by Samsung on 24.10.2016.
  */
-angular.module("App")
-    .controller("MainController", MainController);
+app.controller("MainController", MainController);
 
 MainController.$inject = ["MainService"];
 
@@ -23,6 +22,8 @@ function MainController(MainService) {
     _this.productsIndex = 0;
 
     _this.filterByName = '';
+
+    _this.stepValue = 1;
 
     _this.getCategoryProducts = getCategoryProducts;
     _this.getProducts = getProducts;
@@ -111,6 +112,7 @@ function MainController(MainService) {
         _this.product = _this.products[productId];
 
         _this.productId = productId;
+        _this.stepValue = 1;
         localStorage.setItem('productId', productId);
         localStorage.setItem('filter', _this.filterByName);
     }

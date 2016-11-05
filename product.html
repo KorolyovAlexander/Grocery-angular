@@ -1,5 +1,8 @@
 <div id="product">
     <p class="title">{{vm.product.name}}</p>
     <p>price: {{vm.product.price}}</p>
-    <image class="productsImage" ng-src="{{vm.product.image}}"></image>
+    <br/>
+    <input type="range" min="1" max="2" step="0.1" ng-model="vm.stepValue" />
+    <br/>
+    <zoom-image></zoom-image>
 </div>

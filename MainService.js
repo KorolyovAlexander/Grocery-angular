@@ -1,8 +1,7 @@
 /**
  * Created by Samsung on 24.10.2016.
  */
-angular.module("App")
-    .service("MainService", MainService);
+app.service("MainService", MainService);
 
 MainService.$inject = ["$http"];
 
